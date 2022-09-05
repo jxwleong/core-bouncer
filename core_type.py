@@ -1,7 +1,7 @@
 # Contact: jxwleong/xleong
 import cpuid
 import psutil
-
+import json
 
 def get_core_type():
     cpu = cpuid.CPUID()
@@ -13,13 +13,17 @@ total_core_count = psutil.cpu_count()
 
 
 def main():
+    core_mapping = {}
     for core in range(total_core_count):
         current_process = psutil.Process()
     
         # Set affinity
         current_process.cpu_affinity([core])  # expecting list terable
-        print(f"Core{core}------------->{get_core_type()}")
+        #print(f"Core{core}------------->{get_core_type()}")
+        core_mapping[f"core_{core}"] = get_core_type()
 
+    print(json.dumps(core_mapping, indent="\t"))
 
+    
 if __name__ == "__main__":
     main()
