@@ -1,10 +1,16 @@
 # Contact: jxwleong/xleong
 import subprocess
 import json
+import logging
 import os
 
+from common import core_type_def
+from common import core_type_command
+import logger
+
+logger = logging.getLogger(__name__)
 ROOT = os.path.normpath(os.path.join(os.path.abspath(__file__), ".."))
-command = "bin/linux/core_type" if os.name == "posix" else "bin\windows\core_type.exe" if os.name == "nt" else "Not supported OS"
+command = core_type_command[os.name]
 
 # Make full path to the binaries instead of relative path
 full_command = os.path.join(ROOT, command)
