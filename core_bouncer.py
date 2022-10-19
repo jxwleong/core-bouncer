@@ -101,18 +101,21 @@ if __name__ == "__main__":
     core_mapping_dict = json.loads(core_mapping_process.stdout.decode("utf-8"))
     
     # mock
-    core_mapping_dict = {
-            "core_0":"Atom (0x20)",
-            "core_1":"Atom (0x20)",
-            "core_2":"Atom (0x20)",
-            "core_3":"Atom (0x20)",
-            "core_4":"Core (0x40)",
-            "core_5":"Core (0x40)",
-            "core_6":"Core (0x40)",
-            "core_7":"Core (0x40)"
-    }
+    #core_mapping_dict = {
+    #        "core_0":"Atom (0x20)",
+    #        "core_1":"Atom (0x20)",
+    #        "core_2":"Atom (0x20)",
+    #       "core_3":"Atom (0x20)",
+    #        "core_4":"Core (0x40)",
+    #        "core_5":"Core (0x40)",
+    #        "core_6":"Core (0x40)",
+    #        "core_7":"Core (0x40)"
+    #}
 
     atom_list, core_list = get_core_list(core_mapping_dict)
+    print(f"Atom core list: {atom_list}")
+    print(f"Big core list: {core_list}")
+    
     if 'Unknown type (0x0)' in core_mapping_dict.values():      
         print("Not Hybrid Core Config detected!")
     else:
