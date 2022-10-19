@@ -128,10 +128,12 @@ if __name__ == "__main__":
             time.sleep(argtable["switch_time"])
             if current_core == "core":
                 next_core = random.choice(atom_list)
+                current_core = "atom"  # Not nice but its work..
             elif current_core == "atom":
                 next_core = random.choice(core_list)
+                current_core = "core"
             print(f"{datetime.datetime.now()}Affinitize process {psutil_app_process} to core {next_core}")
             psutil_app_process.cpu_affinity([next_core])
-            current_core = next_core
+            
 
     os.kill(app_process.pid, signal.SIGINT)
