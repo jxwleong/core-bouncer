@@ -1,5 +1,6 @@
 # Contact: jxwleong/xleong
 import argparse
+import datetime
 import subprocess
 import json
 import logging
@@ -129,7 +130,7 @@ if __name__ == "__main__":
         
         # Start with big core only first then atom       
         random_big_core = random.choice(core_list)
-        print(f"Affinitize process {psutil_app_process} to core {random_big_core}")
+        print(f"{datetime.datetime.now()} Affinitize process {psutil_app_process} to core {random_big_core}")
         psutil_app_process.cpu_affinity([random_big_core])
         current_core = "core"
         for iteration in range(iterations):
@@ -138,7 +139,7 @@ if __name__ == "__main__":
                 next_core = random.choice(atom_list)
             elif current_core == "atom":
                 next_core = random.choice(core_list)
-            print(f"Affinitize process {psutil_app_process} to core {next_core}")
+            print(f"{datetime.datetime.now()}Affinitize process {psutil_app_process} to core {next_core}")
             psutil_app_process.cpu_affinity([next_core])
 
 
