@@ -132,6 +132,6 @@ if __name__ == "__main__":
                 next_core = random.choice(core_list)
             print(f"{datetime.datetime.now()}Affinitize process {psutil_app_process} to core {next_core}")
             psutil_app_process.cpu_affinity([next_core])
-
+            current_core = next_core
 
     os.kill(app_process.pid, signal.SIGINT)
