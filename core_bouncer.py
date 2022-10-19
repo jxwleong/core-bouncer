@@ -6,7 +6,6 @@ import logging
 import os
 import signal
 import sys
-import shlex
 import time
 import psutil
 import random
@@ -122,7 +121,7 @@ if __name__ == "__main__":
     start_time_in_seconds = int(time.time())
     expect_end_time_in_seconds = start_time_in_seconds + argtable["total_time"]
     
-    application_command = shlex.split(argtable["application"])
+    application_command = argtable["application"].split(" ")
     while int(time.time()) < expect_end_time_in_seconds:
         app_process = subprocess.Popen(application_command)
         psutil_app_process = psutil.Process(pid=app_process.pid)
