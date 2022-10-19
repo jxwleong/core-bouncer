@@ -132,7 +132,7 @@ if __name__ == "__main__":
             elif current_core == "atom":
                 next_core = random.choice(core_list)
                 current_core = "core"
-            print(f"{datetime.datetime.now()}Affinitize process {psutil_app_process} to core {next_core}")
+            print(f"{datetime.datetime.now()} Affinitize process {psutil_app_process} to core {next_core}")
             psutil_app_process.cpu_affinity([next_core])
             
 
