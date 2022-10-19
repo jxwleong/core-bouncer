@@ -94,7 +94,7 @@ def get_switch_iteration(total_timeout, switch_time):
 if __name__ == "__main__":
     arg_parser = argparser_init()
     process_arg(arg_parser)
-    print(argtable)s
+    print(argtable)
     # Make full path to the binaries instead of relative path
     full_command = os.path.join(ROOT, command)
     core_mapping_process = subprocess.run(full_command, capture_output=True)
