@@ -6,10 +6,8 @@ import json
 import logging
 
 from common import core_type_def
-import logger
 
 logger = logging.getLogger(__name__)
-
 
 
 def get_core_type():
