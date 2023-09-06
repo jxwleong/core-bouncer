@@ -101,13 +101,13 @@ if __name__ == "__main__":
     core_mapping_dict = json.loads(core_mapping_process.stdout.decode("utf-8"))
 
     atom_list, core_list = get_core_list(core_mapping_dict)
-    print(f"Atom core list: {atom_list}")
-    print(f"Big core list: {core_list}")
+    logger.info(f"Atom core list: {atom_list}")
+    logger.info(f"Big core list: {core_list}")
 
     if 'Unknown type (0x0)' in core_mapping_dict.values():      
-        print("Not Hybrid Core Config detected!")
+        logger.warning("Not Hybrid Core Config detected!")
     else:
-        print("Hybrid Core detected!")
+        logger.info("Hybrid Core detected!")
 
     iterations = get_switch_iteration(argtable["total_time"], argtable["switch_time"])
     start_time_in_seconds = int(time.time())
@@ -121,7 +121,7 @@ if __name__ == "__main__":
         
         # Start with big core only first then atom       
         random_big_core = random.choice(core_list)
-        print(f"{datetime.datetime.now()} Affinitize process {psutil_app_process} to core {random_big_core}")
+        logger.info(f"{datetime.datetime.now()} Affinitize process {psutil_app_process} to core {random_big_core}")
         psutil_app_process.cpu_affinity([random_big_core])
         current_core = "core"
         for iteration in range(iterations):
@@ -132,7 +132,7 @@ if __name__ == "__main__":
             elif current_core == "atom":
                 next_core = random.choice(core_list)
                 current_core = "core"
-            print(f"{datetime.datetime.now()} Affinitize process {psutil_app_process} to core {next_core}")
+            logger.info(f"{datetime.datetime.now()} Affinitize process {psutil_app_process} to core {next_core}")
             psutil_app_process.cpu_affinity([next_core])
             
 
