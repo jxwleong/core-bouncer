@@ -7,6 +7,6 @@ core_type_def = {
 
 # Give the relative path to core_type.exe for windows or core_type for linux
 core_type_command = {
-    "nt": "bin\windows\core_type.exe",
+    "nt": "core_type.exe",
     "posix": "bin/linux/core_type" 
 }
