@@ -1,4 +1,5 @@
 # Contact: jxwleong/xleong
+# pyinstaller .\core_bouncer.py --onefile --paths="path\cpuid.py\lib;path\cpuid.py"
 import argparse
 import datetime
 import subprocess
@@ -8,24 +9,28 @@ import os
 import signal
 import sys
 import time
-import psutil
 import random
 
+ROOT = os.path.normpath(os.path.join(os.path.abspath(__file__), ".."))
+LIB = os.path.normpath(os.path.join(ROOT, "lib"))
+
+sys.path.append(ROOT)
+sys.path.append(LIB)
+
+import psutil
+import logger
 from common import core_type_def
 from common import core_type_command
-import logger
+
 
 logger = logging.getLogger(__name__)
-ROOT = os.path.normpath(os.path.join(os.path.abspath(__file__), ".."))
 command = core_type_command[os.name]
-
 
 argtable = {
     "application": "notepad.exe",
     "total_time": None,
     "switch_time": None
 }
-
 
 
 def argparser_init():
@@ -94,10 +99,11 @@ def get_switch_iteration(total_timeout, switch_time):
 if __name__ == "__main__":
     arg_parser = argparser_init()
     process_arg(arg_parser)
-    print(argtable)
-    # Make full path to the binaries instead of relative path
-    full_command = os.path.join(ROOT, command)
-    core_mapping_process = subprocess.run(full_command, capture_output=True)
+    logger.info(argtable)
+
+    # Some issue with pyinstaller --onefile as it change the executable
+    # path into some temp folder instead of the ROOT of the repo
+    core_mapping_process = subprocess.run(command, capture_output=True)
     core_mapping_dict = json.loads(core_mapping_process.stdout.decode("utf-8"))
 
     atom_list, core_list = get_core_list(core_mapping_dict)

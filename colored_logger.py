@@ -1,6 +1,13 @@
 # Source: https://stackoverflow.com/a/2532931
 
 import logging
+import os
+import sys 
+
+ROOT = os.path.normpath(os.path.join(os.path.abspath(__file__), ".."))
+LIB = os.path.normpath(os.path.join(ROOT, "lib"))
+
+sys.path.append(LIB)
 from colorama import Fore
 import colorama
 
